@@ -65,7 +65,8 @@ class TodoController extends Controller
         // fillは、引数を設定できるかどうかを確認してくれます。これは、Model ファイル に追記した記述をしていることによって可能としてます。かつ最後の save() でデータの保存を行います。
         $this->todo->fill($input)->save();
         // 一覧画面に遷移させる記述
-        return redirect()->to('todo');
+        // return redirect()->to('todo');
+        return redirect()->route('todo.index');
     }
 
     /**
@@ -107,7 +108,9 @@ class TodoController extends Controller
         $input = $request->all();
         // find で検索し、fill で設定の確認(検証)し、保存という流れです。
         $this->todo->find($id)->fill($input)->save();
-        return redirect()->to('todo');
+        // return redirect()->to('todo');
+        // route メソッドを使用すると、名前付きルートへのリダイレクトを行うことができます。
+        return redirect()->route('todo.index');
     }
 
     /**
@@ -120,6 +123,8 @@ class TodoController extends Controller
     {
         // find で検索し、delete で削除という流れになります。
         $this->todo->find($id)->delete();
-        return redirect()->to('todo');
+        // return redirect()->to('todo');
+        // route メソッドを使用すると、名前付きルートへのリダイレクトを行うことができます。
+        return redirect()->route('todo.index');
     }
 }
