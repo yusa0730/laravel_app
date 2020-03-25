@@ -1,5 +1,6 @@
 <?php
 
+// シードとは最初から用意しておくレコードを作成する機能。
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
@@ -12,6 +13,7 @@ class TodosTableSeeder extends Seeder
      */
     public function run()
     {
+        // truncate()はデータのクリアの処理。
         DB::table('todos')->truncate();
         // CarbonとはPHPで使える日付操作のライブラリで、Laravelには標準装備されています。
         DB::table('todos')->insert([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+// バッティングしてても判別できるように
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware

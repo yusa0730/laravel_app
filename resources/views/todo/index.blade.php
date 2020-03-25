@@ -1,6 +1,9 @@
+<!--layoutsフォルダ内のapp.blade.phpというレイアウトファイルをロードし、親レイアウトを継承する。  -->
 @extends ('layouts.app')
+
 @section ('content')
 
+<!-- Userインスタンスのプロパティnameを取ってくる。 -->
 <h1 class="page-header">{{ Auth::user()->name}}のToDo一覧</h1>
 <p class="text-right">
   <a class="btn btn-success" href="/todo/create">新規作成</a>
@@ -17,14 +20,18 @@
     </tr>
   </thead>
   <tbody>
+    <!-- array型 -->
     @foreach ($todos as $todo)
     <tr>
+        <!-- エスケープ処理して出力。< &とか特殊文字列に変換csrf対策 -->
       <td class="align-middle">{{ $todo->id }}</td>
       <td class="align-middle">{{ $todo->title }}</td>
       <td class="align-middle">{{ $todo->created_at }}</td>
       <td class="align-middle">{{ $todo->updated_at }}</td>
+
       <td><a class="btn btn-primary" href="{{ route('todo.edit', $todo->id) }}">編集</a></td>
       <td>
+        <!-- エスケープ処理しないで出力 -->
         {!! Form::open(['route' => ['todo.destroy', $todo->id], 'method' => 'DELETE']) !!}
           {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}

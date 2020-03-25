@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+// https://qiita.com/washio12/items/59f5cde23b4205973c6b
+// vendor/laravel/framework/src/Illuminate/Fundation/Auth/AuthenticatesUsers.phpが実際の表記
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -19,9 +21,10 @@ class LoginController extends Controller
     |
     */
 
+    // 何故treitを見に行くのか
+    // メソッドを探す順序
     use AuthenticatesUsers;
 
-    // LoginControllerではAuthenticatesUsersトレイトをuseしており、そこでuseされているThrottlesLoginsトレイトに、ログインロック機能が実装されています。
     protected $maxAttempts = 2;
 
     /**
@@ -38,13 +41,13 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        // logoutはログイン中の’guest’ミドルウェアからは除きますよ、って定義をしてあるようだ。だからログイン中にログアウトできるということ
-        // guestのミドルウェアをコンストラクタで使用することにより、ログアウト(getLogout)以外のメソッド、つまり会員登録（getRegisterとpostRegister）とログイン（getLoginとpostLogin)のメソッドにおいて、すでにログインしているなら/homeにリダイレクトします。
         $this->middleware('guest')->except('logout');
     }
 
     protected function loggedOut(Request $request)
     {
+        // dd(redirect('/login'));
+        // RedirectResponseインスタンス
         return redirect('/login');
     }
 }

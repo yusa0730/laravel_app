@@ -1,11 +1,16 @@
+<!-- layoutsディレクトリ配下のapp.bladeを継承している。 app.blade.phpのyield部分に差し込んで表示-->
 @extends ('layouts.app')
 @section ('content')
 
-<h2 class="mb-3">ToDo編集</h2>
-{!! Form::open(['route' => 'todo.store'])!!}
+<h2 class="mb-3">ToDo作成</h2>
+
+
+{!! Form::open(['route' => 'todo.store']) !!}
   <div class="form-group">
+
     {!! Form::input('text', 'title', null, ['required', 'class' => 'form-control', 'placeholder' => 'ToDo内容']) !!}
   </div>
+
   {!! Form::submit('追加', ['class' => 'btn btn-success float-right']) !!}
 {!! Form::close() !!}
 

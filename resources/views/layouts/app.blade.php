@@ -1,3 +1,4 @@
+<!-- bladeの利点->テンプレートの継承とセクションが使える -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -5,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
+    <!-- csrfトークンを入れる記述 -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -39,21 +41,25 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <!-- ログインしていない場合 -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
+                            <!-- リクエストに値が存在するかを判定するには、hasメソッドを使用します。hasメソッドは、リクエストに値が存在する場合に、trueを返します。-->
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                        <!-- ログインしている場合 -->
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+                                <!-- preventDefault()はaタグの動きを止めている -->
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -73,6 +79,8 @@
         </nav>
 
         <main class="container py-4">
+            <!-- 継承はできず、デフォルト値の設定が可能です。 sectionの内容をはめ込む。-->
+            <!-- yieldで指定した名前のセクションがあるとそのsectionがyieldのところにはめ込まれる -->
             @yield('content')
         </main>
     </div>

@@ -8,6 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    <!-- loginコントローラーのloginアクションに飛ぶ -->
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
